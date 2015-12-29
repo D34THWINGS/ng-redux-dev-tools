@@ -1,0 +1,165 @@
+@import 'colors';
+
+.log-monitor {
+  position: absolute;
+  top: 0;
+  font-family: monospace;
+  font-size: 1rem;
+  width: 100%;
+  height: 100%;
+  background: $base00;
+}
+
+.log-monitor__button-group {
+  display: flex;
+  flex-direction: row;
+  margin: 1px 0 5px;
+}
+
+%log-monitor-button {
+  border: 0;
+  padding: 4px 0;
+  flex: 1;
+  border-radius: 3px;
+  outline: 0;
+  font-family: monospace;
+  font-size: 1rem;
+  cursor: pointer;
+
+  + * {
+    margin-left: 4px;
+  }
+}
+
+.log-monitor__button--enabled {
+  @extend %log-monitor-button;
+
+  background: $base02;
+  color: $base06;
+}
+
+.log-monitor__button--disabled {
+  @extend %log-monitor-button;
+
+  cursor: not-allowed;
+  background: $base00;
+  color: $base02;
+}
+
+.log-monitor__entries {
+  overflow-y: auto;
+  height: calc(100% - 33px);
+  width: calc(100% + 21px);
+  position: relative;
+}
+
+%log-monitor-entry-type {
+  padding: 8px 16px 7px;
+  background: $base02;
+  color: $base06;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.log-monitor__entry__type {
+  @extend %log-monitor-entry-type;
+}
+
+.log-monitor__entry__type--collapsed {
+  @extend %log-monitor-entry-type;
+
+  background: $base01;
+  color: $base02;
+  text-decoration: line-through;
+}
+
+.log-monitor__entry__payload {
+  padding: 15px;
+}
+
+%log-monitor-json {
+  box-sizing: border-box;
+
+  &.expandable {
+    position: relative;
+    margin-left: 14px;
+
+    &::before {
+      display: block;
+      position: absolute;
+      top: 10px;
+      left: -14px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid $base0D;
+      content: ' ';
+      pointer-events: none;
+      transform: rotate(-90deg);
+    }
+
+    &::before, & > .log-monitor__json__key {
+      cursor: pointer;
+    }
+
+    &.expanded::before {
+      transform: rotate(0deg);
+    }
+  }
+
+  & + & {
+    margin-top: 10px;
+  }
+}
+
+.log-monitor__json--object {
+  @extend %log-monitor-json;
+
+  .log-monitor__json__branch-preview,
+  .log-monitor__json__leaf-value {
+    color: $base04;
+  }
+}
+
+.log-monitor__json--array {
+  @extend %log-monitor-json;
+
+  .log-monitor__json__branch-preview {
+    color: $base0E;
+  }
+}
+
+.log-monitor__json--number,
+.log-monitor__json--boolean,
+.log-monitor__json--null,
+.log-monitor__json--undefined {
+  @extend %log-monitor-json;
+
+  .log-monitor__json__leaf-value {
+    color: $base09;
+  }
+}
+
+.log-monitor__json--string {
+  @extend %log-monitor-json;
+
+  .log-monitor__json__leaf-value {
+    color: $base0B;
+  }
+}
+
+.log-monitor__json__key {
+  vertical-align: middle;
+  color: $base0D;
+}
+
+.log-monitor__json__branch-preview {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.log-monitor__json__branch-value {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}

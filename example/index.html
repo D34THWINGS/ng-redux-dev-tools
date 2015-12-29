@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular Redux DevTools</title>
+  <link rel="stylesheet" href="../dist/ng-redux-dev-tools.css">
+</head>
+<body ng-app="myApp">
+  <div ng-controller="TestController as ctrl">
+    Counter: <span ng-bind="ctrl.count"></span><br/>
+    <form autocomplete="off" ng-submit="ctrl.increment()">
+      <input type="number" min="1" required ng-model="ctrl.value">
+      <input type="submit" value="Go">
+    </form>
+  </div>
+  <dock-monitor>
+    <log-monitor></log-monitor>
+  </dock-monitor>
+  <script src="../node_modules/angular/angular.js"></script>
+  <script src="../node_modules/ng-redux/dist/ng-redux.js"></script>
+  <script src="../dist/ng-redux-dev-tools.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

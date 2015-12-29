@@ -1,0 +1,18 @@
+<div class="log-monitor">
+  <div class="log-monitor__button-group">
+    <lm-button ng-click="logMonitorCtrl.reset()" enabled="true">Reset</lm-button>
+    <lm-button ng-click="logMonitorCtrl.revert()" enabled="logMonitorCtrl.hasComputedStates()">Revert</lm-button>
+    <lm-button ng-click="logMonitorCtrl.sweep()" enabled="logMonitorCtrl.canSweep()">Sweep</lm-button>
+    <lm-button ng-click="logMonitorCtrl.commit()" enabled="logMonitorCtrl.computedStates.length > 1">Commit</lm-button>
+  </div>
+  <div class="log-monitor__entries">
+    <lm-entry
+      ng-repeat="actionId in logMonitorCtrl.stagedActionIds track by $index"
+      action-id="::actionId"
+      action="::logMonitorCtrl.getActionById(actionId)"
+      state="::logMonitorCtrl.getComputedState($index)"
+      previous-state="::logMonitorCtrl.getPreviousComputedState($index)"
+      collapsed="logMonitorCtrl.isSkippedAction(actionId)"
+      toggle-action-handler="::logMonitorCtrl.handleToggleAction(id)"></lm-entry>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+$dock-monitor-background-color: #FFFFFF;
+$dock-monitor-shadow-color: #333333;
+$dock-monitor-hook-size: 6px;
+
+%dock-monitor {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 300px;
+  background: $dock-monitor-background-color;
+  box-shadow: 0 0 15px $dock-monitor-shadow-color;
+  font-family: monospace;
+  z-index: 1000;
+  transition: right 0.25s ease-in-out, opacity 0.25s ease-in-out;
+}
+
+.dock-monitor--visible {
+  @extend %dock-monitor;
+
+  right: 0;
+  opacity: 1;
+}
+
+.dock-monitor--hidden {
+  @extend %dock-monitor;
+
+  right: -500px;
+  opacity: 0;
+}
+
+.dock-monitor__container {
+  position: relative;
+  height: 100%;
+}
+
+.dock-monitor__resize-hook {
+  position: absolute;
+  top: 0;
+  left: $dock-monitor-hook-size / -2;
+  height: 100%;
+  width: $dock-monitor-hook-size;
+  cursor: ew-resize;
+}

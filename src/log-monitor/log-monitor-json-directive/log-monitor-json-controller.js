@@ -7,8 +7,9 @@ export class LogMonitorJSONController {
     this.isExpandable = true;
     this.key = `${$scope.key}:`;
     this.value = $scope.value;
-    this.showedValue = $scope.value;
     this.startExpanded = $scope.startExpanded;
+
+    $scope.$watch('value', value => this.value = value);
 
     this.classModifier = LogMonitorJSONController.whatClass(this.value).toLowerCase();
 
@@ -16,25 +17,11 @@ export class LogMonitorJSONController {
     const isArray = LogMonitorJSONController.is(this.value, 'Array');
     if (!isObject && !isArray) {
       this.isExpandable = false;
-
-      if (LogMonitorJSONController.is(this.value, 'String')) {
-        this.showedValue = `"${this.value}"`;
-      }
-
-      if (LogMonitorJSONController.is(this.value, 'Null')) {
-        this.showedValue = 'null';
-      }
-
-      if (LogMonitorJSONController.is(this.value, 'Undefined')) {
-        this.showedValue = 'undefined';
-      }
-
       return;
     }
 
     if (Object.keys(this.value).length === 0) {
       this.isExpandable = false;
-      this.showedValue = isArray ? '[]' : '{}';
       return;
     }
 
@@ -50,6 +37,33 @@ export class LogMonitorJSONController {
     const expandableClass = this.isExpandable ? ' expandable' : '';
     const expandedClass = this.isExpanded ? ' expanded' : '';
     return baseClass + expandableClass + expandedClass;
+  }
+
+  getShowedValue() {
+    const isObject = LogMonitorJSONController.is(this.value, 'Object');
+    const isArray = LogMonitorJSONController.is(this.value, 'Array');
+
+    if (!isObject && !isArray) {
+      if (LogMonitorJSONController.is(this.value, 'String')) {
+        return `"${this.value}"`;
+      }
+
+      if (LogMonitorJSONController.is(this.value, 'Null')) {
+        return 'null';
+      }
+
+      if (LogMonitorJSONController.is(this.value, 'Undefined')) {
+        return 'undefined';
+      }
+
+      return this.value;
+    }
+
+    if (Object.keys(this.value).length === 0) {
+      return isArray ? '[]' : '{}';
+    }
+
+    return this.value;
   }
 
   toggleExpanded() {

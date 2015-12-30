@@ -7,10 +7,15 @@ export class LogMonitorController {
 
     this.store = devToolsService.store;
     this.actions = devToolsActionCreatorsService;
+    this.$scope = $scope;
   }
 
   getActionById(actionId) {
     return this.actionsById[actionId].action;
+  }
+
+  getError(index) {
+    return this.computedStates[index].error;
   }
 
   getComputedState(index) {
@@ -32,19 +37,19 @@ export class LogMonitorController {
   }
 
   reset() {
-    return this.store.dispatch(this.actions.reset());
+    this.store.dispatch(this.actions.reset());
   }
 
   revert() {
-    return this.store.dispatch(this.actions.rollback());
+    this.store.dispatch(this.actions.rollback());
   }
 
   sweep() {
-    return this.store.dispatch(this.actions.sweep());
+    this.store.dispatch(this.actions.sweep());
   }
 
   commit() {
-    return this.store.dispatch(this.actions.commit());
+    this.store.dispatch(this.actions.commit());
   }
 
   hasComputedStates() {

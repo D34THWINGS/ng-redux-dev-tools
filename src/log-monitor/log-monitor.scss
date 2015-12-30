@@ -13,17 +13,19 @@
 .log-monitor__button-group {
   display: flex;
   flex-direction: row;
-  margin: 1px 0 5px;
+  border-bottom: solid 1px $base01;
+  margin-bottom: 4px;
 }
 
 %log-monitor-button {
   border: 0;
-  padding: 4px 0;
+  padding: 3px 0;
+  margin: 4px;
   flex: 1;
   border-radius: 3px;
   outline: 0;
   font-family: monospace;
-  font-size: 1rem;
+  font-size: 0.8rem;
   cursor: pointer;
 
   + * {
@@ -162,4 +164,9 @@
   list-style: none;
   padding-left: 0;
   margin: 0;
+}
+
+.log-monitor__error {
+  color: $base09;
+  margin: 25px 15px;
 }

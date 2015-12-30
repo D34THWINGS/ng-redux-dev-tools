@@ -11,8 +11,10 @@
      value="::logEntryCtrl.action.payload"
      start-expanded="true"></lm-json>
     <lm-json
+     ng-if="!logEntryCtrl.error"
      key="'state'"
-     value="::logEntryCtrl.state"
+     value="logEntryCtrl.state"
      start-expanded="true"></lm-json>
+    <div class="log-monitor__error" ng-if="logEntryCtrl.error" ng-bind="logEntryCtrl.error"></div>
   </div>
 </div>

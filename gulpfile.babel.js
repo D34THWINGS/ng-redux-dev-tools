@@ -31,7 +31,8 @@ function logAndEndStream(err) {
 function browserifyInit(options = {}) {
   const browserifyOptions = Object.assign({}, options, {
     entries: ['src/index.js'],
-    standalone: 'ngReduxDevTools'
+    standalone: 'ngReduxDevTools',
+    plugin: ['browserify-derequire']
   });
 
   return browserify(browserifyOptions)
@@ -152,7 +153,7 @@ gulp.task('bs:init', function () {
 
 gulp.task('watch', function () {
   const watchStylesStream = watch(['src/**/*.scss'], function () {
-    gulp.start('served-styles');
+    gulp.start('serve:styles');
   });
 
   const watchExampleStream = watch(['example/**/*'], function () {

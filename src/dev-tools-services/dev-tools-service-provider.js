@@ -33,7 +33,7 @@ export class DevToolsServiceProvider {
       nextState = reducer(state, action);
     } catch (err) {
       nextError = err.toString();
-      if (typeof window === 'object' && typeof this.$injector.get('$window').chrome !== 'undefined') {
+      if (typeof window === 'object' && typeof window.chrome !== 'undefined') {
         // In Chrome, rethrowing provides better source map support
         setTimeout(() => {
           throw err;

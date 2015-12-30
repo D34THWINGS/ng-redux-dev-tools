@@ -9,6 +9,7 @@ export default function logMonitorEntryDirective() {
       actionId: '=',
       action: '=',
       state: '=',
+      error: '=',
       collapsed: '=',
       toggleActionHandler: '&'
     },

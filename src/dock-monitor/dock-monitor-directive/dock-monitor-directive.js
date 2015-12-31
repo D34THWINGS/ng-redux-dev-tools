@@ -13,12 +13,18 @@ export default function dockMonitorDirective($window, $document) {
     template: dockMonitorDirectiveTemplate,
     scope: {},
     bindToController: {
+      defaultSize: '=',
+      defaultVisible: '=',
       toggleVisibilityKey: '='
     },
     controllerAs: 'dockMonitorCtrl',
     controller: 'DockMonitorController',
     link(scope, elem) {
       const $hook = angular.element(elem[0].querySelector('.dock-monitor__resize-hook'));
+
+      if (scope.dockMonitorCtrl.defaultSize) {
+        elem.css('width', `${scope.dockMonitorCtrl.defaultSize}`);
+      }
 
       function matchesKey(key, event) {
         const charCode = event.keyCode || event.which;

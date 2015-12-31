@@ -4,7 +4,7 @@ export function toggleVisibility() {
   return {type: TOGGLE_VISIBILITY};
 }
 
-export function isVisible(state = true, action) {
+export function isVisible(state = false, action) {
   return action.type === TOGGLE_VISIBILITY ? !state : state;
 }
 

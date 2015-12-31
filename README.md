@@ -70,7 +70,11 @@ module('myApp', [ngRedux, ngReduxDevTools])
 
 ```
 
-That's it. Simple ?
+That's it. Simple ? (The default key to show the DevTools is `Ctrl-H`)
+
+### API
+
+See the [API Reference](API.md).
 
 ### Running example
 

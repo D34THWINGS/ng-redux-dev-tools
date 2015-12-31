@@ -7,22 +7,22 @@ Angular Redux DevTools
 
 The goal of this version of the [Redux DevTools](https://github.com/gaearon/redux-devtools) is to provide a React free developer tools for your Redux/Angular apps, speeding your development build
 
-###Features
+### Features
 
 - Lets you inspect every state and action payload
 - Lets you go back in time by “cancelling” actions
 
-###Overview
+### Overview
 
 The Angular Redux DevTools are largely inspired by [DockMonitor](https://github.com/gaearon/redux-devtools-dock-monitor) and [LogMonitor](https://github.com/gaearon/redux-devtools-log-monitor) with a bit changes to adapt them to the Angular environment. You need to still be careful to not include these tools into production environment. This version is not using the base [Redux DevTools](https://github.com/gaearon/redux-devtools) because it requires to have React in your project. Any suggestions or improvements are welcome. Make sure to follow advices given by [Dan Abramov](https://github.com/gaearon) on Redux DevTools because they basically work basically the same.
 
-###Instalation
+### Instalation
 
 ```
 npm install --save-dev ng-redux-dev-tools
 ```
 
-###Usage
+### Usage
 
 DevTools are pretty easy to use in Angular, everything you have to do is :
 
@@ -72,7 +72,7 @@ module('myApp', [ngRedux, ngReduxDevTools])
 
 That's it. Simple ?
 
-###Running example
+### Running example
 
 Clone the project:
 
@@ -101,7 +101,7 @@ gulp serve
 
 It's a basic counter example, any changes made to the code (even in the example folder) will reload the browser automatically.
 
-###Custom Monitors
+### Custom Monitors
 
 In the Angular version of the tools, it's event simpler to add a new monitor. Here what you need to do :
 
@@ -151,6 +151,6 @@ angular.module('ngCustomMonitor', ['ngRedux', 'ngReduxDevToolsServices'])
 
 See this [issue](https://github.com/gaearon/redux-devtools/issues/3) if you want to learn more about what thing are available to you in the dev tool state and what action you can perform
 
-###Licence
+### Licence
 
 MIT

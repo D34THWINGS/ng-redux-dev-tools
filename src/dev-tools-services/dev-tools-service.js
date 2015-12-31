@@ -7,28 +7,24 @@ export class DevToolsService {
     this.store = store.liftedStore;
   }
 
-  connect() {
-    return (mapStateToTarget, mapDispatchToTarget) => {
+  connect(mapStateToTarget, mapDispatchToTarget) {
+    const finalMapStateToTarget = mapStateToTarget || this.defaultMapStateToTarget;
+    const finalMapDispatchToTarget = mapDispatchToTarget || this.defaultMapDispatchToTarget;
 
-      const finalMapStateToTarget = mapStateToTarget || this.defaultMapStateToTarget;
+    let slice = finalMapStateToTarget(this.store.getState());
 
-      const finalMapDispatchToTarget = mapDispatchToTarget || this.defaultMapDispatchToTarget;
+    const boundActionCreators = finalMapDispatchToTarget(this.store.dispatch);
 
-      let slice = finalMapStateToTarget(this.store.getState());
+    return target => {
+      this.updateTarget(target, slice, boundActionCreators);
 
-      const boundActionCreators = finalMapDispatchToTarget(this.store.dispatch);
-
-      return target => {
-        this.updateTarget(target, slice, boundActionCreators);
-
-        return this.store.subscribe(() => {
-          const nextSlice = finalMapStateToTarget(this.store.getState());
-          if (!this.shallowEqual(slice, nextSlice)) {
-            slice = nextSlice;
-            this.updateTarget(target, slice, boundActionCreators);
-          }
-        });
-      };
+      return this.store.subscribe(() => {
+        const nextSlice = finalMapStateToTarget(this.store.getState());
+        if (!this.shallowEqual(slice, nextSlice)) {
+          slice = nextSlice;
+          this.updateTarget(target, slice, boundActionCreators);
+        }
+      });
     };
   }
 

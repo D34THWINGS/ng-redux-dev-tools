@@ -6,6 +6,9 @@ export default function logMonitorDirective() {
     replace: true,
     require: '^devTools',
     template: logMonitorDirectiveTemplate,
+    bindToController: {
+      select: '='
+    },
     controllerAs: 'logMonitorCtrl',
     controller: 'LogMonitorController'
   };

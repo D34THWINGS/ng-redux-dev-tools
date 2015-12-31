@@ -2,7 +2,7 @@ export class LogMonitorController {
   constructor(devToolsService, devToolsActionCreatorsService, $scope) {
     'ngInject';
 
-    const unsubscribe = devToolsService.connect()(state => state)(this);
+    const unsubscribe = devToolsService.connect(this.select || (state => state))(this);
     $scope.$on('$destroy', unsubscribe);
 
     this.store = devToolsService.store;

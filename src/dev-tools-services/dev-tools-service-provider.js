@@ -1,18 +1,20 @@
 /* eslint complexity: 0 */
 
 import difference from 'lodash/array/difference';
+import mapValues from 'lodash/object/mapValues';
+import identity from 'lodash/utility/identity';
 
 import {DevToolsService} from './dev-tools-service';
 import {ActionTypes, ActionCreators} from './actions';
 
 export class DevToolsServiceProvider {
-  constructor($injector) {
+  constructor($injector, $logProvider, $windowProvider) {
     'ngInject';
 
     this.monitorReducers = [];
     this.INIT_ACTION = {type: '@@INIT'};
 
-    this.$injector = $injector;
+    this.$log = $injector.invoke($logProvider.$get, null, {$window: $windowProvider.$get()});
   }
 
   registerReducer(reducer) {
@@ -33,14 +35,7 @@ export class DevToolsServiceProvider {
       nextState = reducer(state, action);
     } catch (err) {
       nextError = err.toString();
-      if (typeof window === 'object' && typeof window.chrome !== 'undefined') {
-        // In Chrome, rethrowing provides better source map support
-        setTimeout(() => {
-          throw err;
-        });
-      } else {
-        this.$injector.get('$log').error(err.stack || err);
-      }
+      this.$log.error(err.stack || err);
     }
 
     return {
@@ -269,6 +264,60 @@ export class DevToolsServiceProvider {
     return createStore => (reducer, initialState) => {
       const liftedStore = createStore(this.liftReducer(reducer, initialState));
       return this.unliftStore(liftedStore, this.liftReducer);
+    };
+  }
+
+  persistState(sessionId, deserializeState = identity, deserializeAction = identity) {
+    if (!sessionId) {
+      return next => (...args) => next(...args);
+    }
+
+    function deserialize(state) {
+      return Object.assign({}, state, {
+        actionsById: mapValues(state.actionsById, liftedAction => Object.assign({}, liftedAction, {
+          action: deserializeAction(liftedAction.action)
+        })),
+        committedState: deserializeState(state.committedState),
+        computedStates: state.computedStates.map(computedState => Object.assign({}, computedState, {
+          state: deserializeState(computedState.state)
+        }))
+      });
+    }
+
+    return next => (reducer, initialState) => {
+      const key = `redux-dev-session-${sessionId}`;
+
+      let finalInitialState;
+      try {
+        const json = localStorage.getItem(key);
+        if (json) {
+          finalInitialState = deserialize(JSON.parse(json)) || initialState;
+          next(reducer, initialState);
+        }
+      } catch (e) {
+        this.$log.warn('Could not read debug session from localStorage:', e);
+        try {
+          localStorage.removeItem(key);
+        } finally {
+          finalInitialState = undefined; // eslint-disable-line no-undefined
+        }
+      }
+
+      const store = next(reducer, finalInitialState);
+
+      return Object.assign({}, store, {
+        dispatch(action) {
+          store.dispatch(action);
+
+          try {
+            localStorage.setItem(key, JSON.stringify(store.getState()));
+          } catch (e) {
+            this.$log.warn('Could not write debug session to localStorage:', e);
+          }
+
+          return action;
+        }
+      });
     };
   }
 

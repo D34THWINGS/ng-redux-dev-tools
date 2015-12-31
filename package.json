@@ -40,7 +40,9 @@
     "parse-key": "^0.2.1"
   },
   "lodashDependencies": [
-    "lodash/array/difference"
+    "lodash/array/difference",
+    "lodash/object/mapValues",
+    "lodash/utility/identity"
   ],
   "devDependencies": {
     "angular": "^1.4.8",

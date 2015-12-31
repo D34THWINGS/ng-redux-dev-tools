@@ -21,6 +21,18 @@ Creates a store enhancer (function) to allow the dev tools to process your actio
 $ngReduxProvider.createStoreWith(reducer, [], [devToolsServiceProvider.instrument()]);
 ```
 
+#### `persistState(key)`
+
+Creates a store enhancer that persists the state into the local storage using a specific key.
+- `key` (*String*): The key you want to store your data with. You can get it from a url query parameter allowing you to persist multiple states for specific state testing.
+
+```js
+$ngReduxProvider.createStoreWith(reducer, [], [
+  devToolsServiceProvider.instrument(),
+  devToolsServiceProvider.persistState('foo')
+]);
+```
+
 ### devToolsApiService
 
 #### `connect([mapStateToTarget, [mapDispatchToTarget]])(target)`

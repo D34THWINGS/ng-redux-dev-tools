@@ -1,13 +1,13 @@
 API Reference
 =============
 
-- Services
-  - devToolsApiServiceProvider
-  - devToolsApiService
-  - devToolsActionCreatorsService
-- Directives
-  - logMonitor
-  - dockMonitor
+- [Services](#services)
+  - [devToolsApiServiceProvider](#devtoolsapiserviceprovider)
+  - [devToolsApiService](#devtoolsapiservice)
+  - [devToolsActionCreatorsService](#devtoolsactioncreatorsservice)
+- [Directives](#directives)
+  - [dockMonitor](#dockmonitor)
+  - [logMonitor](#logmonitor)
 
 ## Services
 

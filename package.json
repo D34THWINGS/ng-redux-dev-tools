@@ -11,7 +11,7 @@
     "prepublish": "npm run lint && npm run test && npm run build"
   },
   "files": [
-    "lib",
+    "dist",
     "src"
   ],
   "repository": {

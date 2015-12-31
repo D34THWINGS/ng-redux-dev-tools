@@ -2,7 +2,7 @@
   "name": "ng-redux-dev-tools",
   "version": "0.0.1",
   "description": "DevTools for Redux using Angular 1.x",
-  "main": "lib/index.js",
+  "main": "dist/ng-redux-dev-tools.js",
   "scripts": {
     "build": "gulp build",
     "lint": "eslint src test example",
@@ -50,6 +50,7 @@
     "babelify": "^7.2.0",
     "browser-sync": "^2.10.1",
     "browserify": "^12.0.1",
+    "browserify-derequire": "^0.9.4",
     "browserify-ngannotate": "^2.0.0",
     "browserify-shim": "^3.8.11",
     "chai": "^3.4.1",

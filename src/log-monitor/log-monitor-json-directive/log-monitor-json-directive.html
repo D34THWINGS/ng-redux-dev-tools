@@ -2,23 +2,22 @@
   <span
    class="log-monitor__json__key"
    ng-click="jsonCtrl.toggleExpanded()"
-   ng-bind="::jsonCtrl.key"></span>
+   ng-bind="jsonCtrl.key"></span>
   <span
    class="log-monitor__json__leaf-value"
-   ng-if="::(!jsonCtrl.isExpandable)"
-   ng-bind="::jsonCtrl.showedValue"></span>
+   ng-if="!jsonCtrl.isExpandable"
+   ng-bind="jsonCtrl.getShowedValue()"></span>
   <span
    class="log-monitor__json__branch-preview"
-   ng-if="::jsonCtrl.isExpandable"
+   ng-if="jsonCtrl.isExpandable"
    ng-show="!jsonCtrl.isExpanded"
    ng-click="toggleExpanded()"
-   ng-bind="::jsonCtrl.preview"></span>
+   ng-bind="jsonCtrl.preview"></span>
   <ul
    class="log-monitor__json__branch-value"
-   ng-if="::jsonCtrl.isExpandable"
-   ng-show="jsonCtrl.isExpanded">
-    <li ng-repeat="(subkey,subval) in ::jsonCtrl.value">
-      <lm-json key="::subkey" value="::subval"></lm-json>
+   ng-if="jsonCtrl.isExpandable && jsonCtrl.isExpanded">
+    <li ng-repeat="(subkey,subval) in jsonCtrl.value">
+      <lm-json key="subkey" value="subval"></lm-json>
     </li>
   </ul>
 </div>

@@ -1,6 +1,10 @@
 Angular Redux DevTools
 ======================
 
+[![build status](https://img.shields.io/travis/D34THWINGS/ng-redux-dev-tools.svg?style=flat-square)](https://travis-ci.org/D34THWINGS/ng-redux-dev-tools)
+[![npm version](https://img.shields.io/npm/v/ng-redux-dev-tools.svg?style=flat-square)](https://www.npmjs.com/package/ng-redux-dev-tools)
+[![npm downloads](https://img.shields.io/npm/dm/ng-redux-dev-tools.svg?style=flat-square)](https://www.npmjs.com/package/ng-redux-dev-tools)
+
 The goal of this version of the [Redux DevTools](https://github.com/gaearon/redux-devtools) is to provide a React free developer tools for your Redux/Angular apps, speeding your development build
 
 ###Features

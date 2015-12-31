@@ -10,7 +10,8 @@
       ng-repeat="actionId in logMonitorCtrl.stagedActionIds track by $index"
       action-id="::actionId"
       action="::logMonitorCtrl.getActionById(actionId)"
-      state="::logMonitorCtrl.getComputedState($index)"
+      state="logMonitorCtrl.getComputedState($index)"
+      error="logMonitorCtrl.getError($index)"
       previous-state="::logMonitorCtrl.getPreviousComputedState($index)"
       collapsed="logMonitorCtrl.isSkippedAction(actionId)"
       toggle-action-handler="::logMonitorCtrl.handleToggleAction(id)"></lm-entry>

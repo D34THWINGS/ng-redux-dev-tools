@@ -1,9 +1,9 @@
 <div class="log-monitor__entry">
   <div
    ng-class="logEntryCtrl.getEntryTypeClass()"
-   title="{{::logEntryCtrl.action.type}}"
+   title="{{::logEntryCtrl.action.type.toString()}}"
    ng-click="logEntryCtrl.toggleActionHandler({id: logEntryCtrl.actionId})"
-   ng-bind="::logEntryCtrl.action.type"></div>
+   ng-bind="::logEntryCtrl.action.type.toString()"></div>
   <div class="log-monitor__entry__payload" ng-if="!logEntryCtrl.collapsed">
     <lm-json
      ng-if="::logEntryCtrl.action.payload"

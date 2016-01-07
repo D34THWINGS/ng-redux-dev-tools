@@ -9,7 +9,7 @@ export class LogMonitorJSONController {
     this.value = $scope.value;
     this.startExpanded = $scope.startExpanded;
 
-    $scope.$watch('value', value => this.value = value.toJS && value.toJS() || value);
+    $scope.$watch('value', value => this.value = value && value.toJS && value.toJS() || value);
 
     this.classModifier = LogMonitorJSONController.whatClass(this.value).toLowerCase();
 
